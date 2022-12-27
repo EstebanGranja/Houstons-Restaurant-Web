@@ -14,6 +14,47 @@ def about_upload_to(instance, filename):
         return 'about/' + filename
 
 
+def special1_upload_to(instance, filename):
+    try:
+        old_instance = Special.objects.get(pk=instance.pk)
+        old_instance.image1.delete()
+        return 'specials/' + filename
+    except:
+        return 'specials/' + filename
+
+def special2_upload_to(instance, filename):
+    try:
+        old_instance = Special.objects.get(pk=instance.pk)
+        old_instance.image2.delete()
+        return 'specials/' + filename
+    except:
+        return 'specials/' + filename
+
+def special3_upload_to(instance, filename):
+    try:
+        old_instance = Special.objects.get(pk=instance.pk)
+        old_instance.image3.delete()
+        return 'specials/' + filename
+    except:
+        return 'specials/' + filename
+
+def special4_upload_to(instance, filename):
+    try:
+        old_instance = Special.objects.get(pk=instance.pk)
+        old_instance.image4.delete()
+        return 'specials/' + filename
+    except:
+        return 'specials/' + filename
+
+def special5_upload_to(instance, filename):
+    try:
+        old_instance = Special.objects.get(pk=instance.pk)
+        old_instance.image5.delete()
+        return 'specials/' + filename
+    except:
+        return 'specials/' + filename
+
+
 def staff_upload_to(instance, filename):
     try:
         old_instance = Staff.objects.get(pk=instance.pk)
@@ -95,14 +136,29 @@ class WhyUs(models.Model):
 #------------------ Specials -----------------------------------------------
 
 class Special(models.Model):
-    name = models.CharField(max_length=50)
-    brief_description = models.TextField()
-    real_description = models.TextField()
-    special_image = models.ImageField(upload_to='specials')
-    tab = models.CharField(null=True, max_length=10, help_text='Following this pattern: #tab-number')
+    special1 = models.CharField(default='Special 1', max_length=50, verbose_name='Special 1')
+    description1 = models.TextField()
+    image1 = models.ImageField(null=True, upload_to=special1_upload_to, verbose_name='Image Special 1')
+
+    special2 = models.CharField(default='Special 2',max_length=50, verbose_name='Special 2')
+    description2 = models.TextField()
+    image2 = models.ImageField(null=True,upload_to=special2_upload_to, verbose_name='Image Special 2')
+
+    special3 = models.CharField(default='Special 3', max_length=50, verbose_name='Special 3')
+    description3 = models.TextField(null=True)
+    image3 = models.ImageField(null=True,upload_to=special3_upload_to, verbose_name='Image Special 3')
+
+    special4 = models.CharField(blank=True, null=True, max_length=50, verbose_name='Special 4 (optional)')
+    description4 = models.TextField(blank=True, null=True)
+    image4 = models.ImageField(null=True, blank=True,upload_to=special4_upload_to, verbose_name='Image Special 4')
+
+    special5 = models.CharField(blank=True, null=True, max_length=50, verbose_name='Special 5 (optional)')
+    description5 = models.TextField(blank=True, null=True)
+    image5 = models.ImageField(null=True, blank=True, upload_to=special5_upload_to, verbose_name='Image Special 5')
+
 
     def __str__(self):
-        return self.name
+        return 'Specials'
 
 
 
